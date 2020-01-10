@@ -1,2 +1,2 @@
 # emacs
-![[./1.png]]
+![emacs](./1.png)
