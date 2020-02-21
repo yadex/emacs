@@ -31,13 +31,15 @@
   :ensure t
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ;(counsel-projectile 1)
+  ;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  ;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 
 (use-package page-break-lines
   :ensure t
+  :init (page-break-lines-mode 1)
   )
 
 
@@ -49,6 +51,7 @@
   :config
   ;(setq dashboard-startup-banner "~/.emacs.d/img/KEC.png")
   ;(setq dashboard-banner-logo-title "最 是 人 间 留 不 住")
+  (setq dashboard-show-shortcuts nil)
   (setq dashboard-startup-banner 4)
   (setq dashboard-center-content t)
   (setq dashboard-items '((recents  . 3)
@@ -72,5 +75,10 @@
                                                      :face 'font-lock-keyword-face))
 
   )
+
+
+
+
+
 (provide 'my-ui)
 

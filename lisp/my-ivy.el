@@ -40,4 +40,31 @@
   (ivy-posframe-mode 1)
 )
 
+
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
+(use-package ivy-rich
+  :ensure t
+  :init (ivy-rich-mode 1))
+
+(use-package counsel
+  :ensure t
+  :init (counsel-mode 1)
+  )
+
+
+
+
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  )
+
+
+
+
+
 (provide 'my-ivy)
