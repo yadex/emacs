@@ -36,6 +36,12 @@
   )
 
 
+(use-package page-break-lines
+  :ensure t
+  )
+
+
+
 (use-package dashboard
   :ensure t
   :init
@@ -46,21 +52,21 @@
   (setq dashboard-startup-banner 4)
   (setq dashboard-center-content t)
   (setq dashboard-items '((recents  . 3)
+                          (projects . 3)
                                         ;(agenda . 3)
                                         ;(bookmarks . 3)
-                          (projects . 3)
                                         ;(registers . 3)
                           ))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (dashboard-modify-heading-icons '((recents . "file-code")
                                     (projects . "rocket")
-                                        ;(bookmarks . "book")
                                     )
                                   )
   (setq dashboard-set-init-info t)
-  (setq dashboard-footer "凡是过往，皆为序章!")
-  (setq dashboard-footer-icon (all-the-icons-fileicon "dashboard"
+  (setq dashboard-set-footer t)
+  ;(setq dashboard-footer "Dashboard is pretty cool!")
+  (setq dashboard-footer-icon (all-the-icons-fileicon "gentoo"
                                                      :height 1.1
                                                      :v-adjust -0.05
                                                      :face 'font-lock-keyword-face))
