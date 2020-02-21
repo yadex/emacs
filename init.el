@@ -2,12 +2,12 @@
       gc-cons-percentage 0.6)
 
 (defvar startup/file-name-handler-alist file-name-handler-alist)
-    (setq file-name-handler-alist nil)
+(setq file-name-handler-alist nil)
 
 (defun startup/revert-file-name-handler-alist () (setq file-name-handler-alist startup/file-name-handler-alist))
 
 (defun startup/reset-gc ()
-    (setq gc-cons-threshold 16777216
+  (setq gc-cons-threshold 16777216
 	gc-cons-percentage 0.1))
 
 (add-hook 'emacs-startup-hook 'startup/revert-file-name-handler-alist)
@@ -47,6 +47,16 @@
 ;(global-display-line-numbers-mode 1)
 ;高亮括号
 (show-paren-mode 1)
+
+(setq default-tab-width 2)
+
+(setq-default indent-tabs-mode nil)
+
+(setq c-default-style "Linux")
+
+(setq c-basic-offset 2)
+
+
 
 ;;
 ;; use use-package
