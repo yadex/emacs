@@ -33,7 +33,7 @@
                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 (package-initialize) 
 
-;(set-frame-font "Hasklug Nerd Font 13")
+(set-frame-font "JetBrainsMono Nerd Font 15")
 (set-frame-font "Iosevka Nerd Font 15")
 
 (set-face-italic 'font-lock-comment-face nil) 

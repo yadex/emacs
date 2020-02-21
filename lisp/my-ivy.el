@@ -36,7 +36,7 @@
         '((left-fringe . 8)
           (right-fringe . 8)))
   ;(custom-set-faces '(ivy-posframe ((t (:background "#212337")))))
-  (setq ivy-posframe-font "Iosevka Nerd Font 13")
+  (setq ivy-posframe-font "Iosevka Nerd Font 15")
   (ivy-posframe-mode 1)
 )
 

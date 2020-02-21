@@ -32,9 +32,10 @@
   :init
   (dashboard-setup-startup-hook)
   :config
-  (setq dashboard-banner-logo-title "最 是 人 间 留 不 住")
+  ;(setq dashboard-startup-banner "~/.emacs.d/img/KEC.png")
+  ;(setq dashboard-banner-logo-title "最 是 人 间 留 不 住")
+  (setq dashboard-startup-banner 4)
   (setq dashboard-center-content t)
-  (setq dashboard-startup-banner "~/.emacs.d/img/ue-green.png")
   (setq dashboard-items '((recents  . 3)
                                         ;(agenda . 3)
                                         ;(bookmarks . 3)
