@@ -27,6 +27,15 @@
 
 
 
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  )
+
+
 (use-package dashboard
   :ensure t
   :init
@@ -39,16 +48,19 @@
   (setq dashboard-items '((recents  . 3)
                                         ;(agenda . 3)
                                         ;(bookmarks . 3)
-                                        ;(projects . 5)
+                          (projects . 3)
                                         ;(registers . 3)
                           ))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book")))
+  (dashboard-modify-heading-icons '((recents . "file-code")
+                                    (projects . "rocket")
+                                        ;(bookmarks . "book")
+                                    )
+                                  )
   (setq dashboard-set-init-info t)
   (setq dashboard-footer "凡是过往，皆为序章!")
-  (setq dashboard-footer-icon (all-the-icons-octicon "dashboard"
+  (setq dashboard-footer-icon (all-the-icons-fileicon "dashboard"
                                                      :height 1.1
                                                      :v-adjust -0.05
                                                      :face 'font-lock-keyword-face))
