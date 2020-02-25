@@ -28,12 +28,24 @@
 (add-to-list 'default-frame-alist '(height.40))
 
 
+;;;
+;;;split windows resize
+;;;
+
+(global-set-key (kbd "s-j") 'shrink-window)
+(global-set-key (kbd "s-k") 'enlarge-window)
+(global-set-key (kbd "s-h") 'shrink-window-horizontally)
+(global-set-key (kbd "s-l") 'enlarge-window-horizontally)
+(global-set-key (kbd "s-=") 'balance-windows)
+
+
 
 (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 (package-initialize) 
 
-(set-frame-font "JetBrainsMono Nerd Font 15")
+;(set-frame-font "Inconsolata Nerd Font 15")
+;(set-frame-font "JetBrainsMono Nerd Font 15")
 (set-frame-font "Iosevka Nerd Font 15")
 
 (set-face-italic 'font-lock-comment-face nil) 
@@ -100,7 +112,7 @@
   :init
   (beacon-mode 1)
   :config
-  (setq beacon-color "#bd93f9")
+  ;(setq beacon-color "#c7f8c7")
   )
 
 
@@ -156,4 +168,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-table ((t (:family "Iosevka")))))
+ '(org-table ((t (:family "Iosevka Nerd Font")))))
