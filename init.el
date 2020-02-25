@@ -32,8 +32,8 @@
 ;;;split windows resize
 ;;;
 
-(global-set-key (kbd "s-j") 'shrink-window)
-(global-set-key (kbd "s-k") 'enlarge-window)
+(global-set-key (kbd "s-k") 'shrink-window)
+(global-set-key (kbd "s-j") 'enlarge-window)
 (global-set-key (kbd "s-h") 'shrink-window-horizontally)
 (global-set-key (kbd "s-l") 'enlarge-window-horizontally)
 (global-set-key (kbd "s-=") 'balance-windows)
