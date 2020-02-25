@@ -27,15 +27,19 @@
   :ensure t
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-  (setq ivy-posframe-height-alist '((swiper . 25)
-                                    (t      . 8)))
-  (setq ivy-posframe-height 25)
-  (setq ivy-posframe-width 60)
+  (setq ivy-posframe-height-alist '((swiper . 11)
+                                    (t      . 9)))
+  (setq ivy-posframe-height 24)
+  (setq ivy-posframe-width 70)
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (setq ivy-posframe-parameters
-        '((left-fringe . 8)
-          (right-fringe . 8)))
-  ;(custom-set-faces '(ivy-posframe ((t (:background "#212337")))))
+
+(setq ivy-posframe-parameters
+      '((left-fringe . 8)
+        (right-fringe . 8)))
+
+
+
+  (custom-set-faces '(ivy-posframe ((t (:background "#161719")))))
   (setq ivy-posframe-font "Iosevka Nerd Font 15")
   (ivy-posframe-mode 1)
 )
