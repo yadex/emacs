@@ -186,12 +186,12 @@
   (setq tide-completion-enable-autoimport-suggestions t)
   )
 
-;(use-package prettier-js
-;  :ensure t
-;  :hook ((js2-mode . prettier-js-mode))
-;  :config
-;  (setq prettier-js-args '("--trailing-comma" "all"
-;                           "--bracket-spacing" "false")))
+(use-package prettier-js
+  :ensure t
+  :hook ((js2-mode . prettier-js-mode))
+  :config
+  (setq prettier-js-args '("--trailing-comma" "all"
+                           "--bracket-spacing" "false")))
 
 
 ;;
