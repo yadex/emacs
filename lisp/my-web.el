@@ -1,165 +1,56 @@
-;;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;;                         web developer
-;;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;;; web.el --- Web related setup                     -*- lexical-binding: t; -*-
+(defun my-setup-indent (n)
+  (setq js-indent-level n)
+  (setq js2-basic-offset n)
+  (setq javascript-indent-level n)
+  (setq typescript-indent-level n)
+  (setq web-mode-markup-indent-offset n)
+  (setq web-mode-css-indent-offset n)
+  (setq web-mode-code-indent-offset n)
+  (setq css-indent-offset n))
+(my-setup-indent 2)
 
-;;; Code:
+
+
+;;+++++++++++++++++++++++++++++++++++++++++++
+;;    
+;;  web
+;; 
+;;+++++++++++++++++++++++++++++++++++++++++++
+
 (use-package web-mode
   :ensure t
-  :mode ("\\.html\\'" "\\.vue\\'" "\\.jsx\\'")
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-enable-current-element-highlight t)
-  (setq web-mode-enable-css-colorization t)
-  (set-face-attribute 'web-mode-html-tag-face nil :foreground "royalblue")
-  (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "powderblue")
-  (set-face-attribute 'web-mode-doctype-face nil :foreground "lightskyblue")
-  (setq web-mode-content-types-alist
-        '(("vue" . "\\.vue\\'")))
-  (use-package company-web
-    :ensure t)
-  (add-hook 'web-mode-hook (lambda()
-                             (cond ((equal web-mode-content-type "html")
-                                    (my/web-html-setup))
-                                   ((member web-mode-content-type '("vue"))
-                                    (my/web-vue-setup))
-                                   )))
+  :mode ("\\.html\\'" . web-mode)
   )
-
-;;
-;; html
-;;
-(defun my/web-html-setup()
-  "Setup for web-mode html files."
-  (message "web-mode use html related setup")
-  (flycheck-add-mode 'html-tidy 'web-mode)
-  (flycheck-select-checker 'html-tidy)
-  (add-to-list (make-local-variable 'company-backends)
-               '(company-web-html company-files company-css company-capf company-dabbrev))
-  (add-hook 'before-save-hook #'sgml-pretty-print)
-
-  )
-
-
-;;
-;; web-mode for vue
-;;
-(defun my/web-vue-setup()
-  "Setup for js related."
-  (message "web-mode use vue related setup")
-  (setup-tide-mode)
-  (prettier-js-mode)
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  (flycheck-select-checker 'javascript-eslint)
-  (my/use-eslint-from-node-modules)
-  (add-to-list (make-local-variable 'company-backends)
-               '(comany-tide company-web-html company-css company-files))
-  )
-
-
-;;
-;; eslint use local
-;;
-(defun my/use-eslint-from-node-modules ()
-  "Use local eslint from node_modules before global."
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-javascript-eslint-executable eslint))))
-
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                 rjsx                ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package rjsx-mode
-  :ensure t
-  :mode ("\\.js\\'")
-  :config
-  (setq js2-basic-offset 2)
-  (add-hook 'rjsx-mode-hook (lambda()
-                              (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
-                              (my/use-eslint-from-node-modules)
-                              (flycheck-select-checker 'javascript-eslint)
-                              ))
-  (setq js2-basic-offset 2)
-  )
-
-(use-package react-snippets
-  :ensure t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                 css                 ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package css-mode
-  :ensure t
-  :mode "\\.css\\'"
-  :config
-  (add-hook 'css-mode-hook (lambda()
-                             (add-to-list (make-local-variable 'company-backends)
-                                          '(company-css company-files company-yasnippet company-capf))))
-  (setq css-indent-offset 2)
-  (setq flycheck-stylelintrc "~/.stylelintrc")
-  )
-
-
-(use-package scss-mode
-  :ensure t
-  :mode "\\scss\\'"
-  )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                emmet                ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (use-package emmet-mode
   :ensure t
-  :hook (web-mode sgml-mode css-mode scss-mode js2-mode vue-mode rjsx-mode)
   :config
-  (define-key emmet-mode-keymap (kbd "C-l") 'emmet-expand-line)
-  (add-hook 'emmet-mode-hook (lambda ()
-                               (setq emmet-indent-after-insert t)))
+  (define-key emmet-mode-keymap(kbd "C-l") 'emmet-expand-line)
   )
 
+;;;
+;;;js
+;;;
 
-
-(use-package mode-local
-  :ensure t
-  :config
-  (setq-mode-local rjsx-mode emmet-expand-jsx-className? t)
-  (setq-mode-local web-mode emmet-expand-jsx-className? nil)  
-  )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                  js                 ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package js2-mode
   :ensure t
-  ;; :mode (("\\.js\\'" . js2-mode)
-  ;;        ("\\.json\\'" . javascript-mode))
-  :init
-  (setq indent-tabs-mode nil)
-  (setq js2-basic-offset 2)
-  (setq js-indent-level 2)
-  (setq js2-global-externs '("module" "require" "assert" "setInterval" "console" "__dirname__") )
+  :mode  ("\\.js\\'" . js2-mode)
+  :config
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;              typescript             ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package rjsx-mode
+  :ensure t
+  )
 
+(use-package json-mode
+  :ensure t
+  )
+
+;;;
+;;; typescript 
+;;;
 (defun setup-tide-mode ()
-  "Setup tide mode for other mode."
   (interactive)
   (message "setup tide mode")
   (tide-setup)
@@ -169,10 +60,24 @@
   (tide-hl-identifier-mode +1)
   (company-mode +1))
 
+(setq company-tooltip-align-annotations t)
 
-(add-hook 'js2-mode-hook #'setup-tide-mode)
+;;;use prettier-js instead of tide-format
+;(add-hook 'before-save-hook 'tide-format-before-save)
+
+
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'js-mode-hook #'setup-tide-mode)
+(add-hook 'js2-mode-hook #'setup-tide-mode)
 (add-hook 'rjsx-mode-hook #'setup-tide-mode)
+
+(use-package prettier-js
+  :ensure t
+  :config 
+  (define-key js2-mode-map(kbd "C-c C-c p") 'prettier-js)
+  (define-key js-mode-map(kbd "C-c C-c p") 'prettier-js)
+  (define-key rjsx-mode-map(kbd "C-c C-c p") 'prettier-js)
+  )
 
 
 
@@ -180,29 +85,15 @@
   :ensure t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode))
-  ;;(before-save . tide-format-before-save))
+         (typescript-mode . tide-hl-identifier-mode)
+         ;(before-save . tide-format-before-save)
+         )
   :config
-  (setq tide-completion-enable-autoimport-suggestions t)
+  ;(setq tide-completion-enable-autoimport-suggestions t)
+  (setq tide-tsserver-process-environment '("TSS_LOG=-level verbose -file /tmp/tss.log"))
+  ;(setq tide-tsserver-executable "~/node_modules/typescript/bin/tsserver")
+  (setq create-lockfiles nil)
   )
 
-(use-package prettier-js
-  :ensure t
-  :hook ((js2-mode . prettier-js-mode))
-  :config
-  (setq prettier-js-args '("--trailing-comma" "all"
-                           "--bracket-spacing" "false")))
-
-
-;;
-;; restful client
-;;
-
-
-(use-package restclient
-  :ensure t
-  :mode ("\\.http\\'" . restclient-mode)
-  )
 
 (provide 'my-web)
-
