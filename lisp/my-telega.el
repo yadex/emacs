@@ -1,7 +1,8 @@
 (use-package telega
   :ensure t
   :config
-  (setq telega-proxies (list' (:server "127.0.0.1" :port 1080 :enable t:type (:@type "proxyTypeSocks5"))))
+  ;(setq telega-proxies (list' (:server "127.0.0.1" :port 1080 :enable t:type (:@type "proxyTypeSocks5"))))
+  (setq telega-proxies (list' (:server "127.0.0.1" :port 1080 :enable t :type (:@type "proxyTypeSocks5"))))
 
   (global-set-key (kbd "C-c t") 'telega)
   (telega-mode-line-mode 1)
@@ -44,8 +45,10 @@
 (defun telega-buffer-face-mode-variable ()
     (interactive)
     (make-face 'my-telega-face)
-    (set-face-attribute 'my-telega-face nil :font "WenQuanYi ZenHei Mono 15")
-    (setq buffer-face-mode-face 'my-telega-face)
+    (set-face-attribute 'my-telega-face nil :font "Sarasa Mono SC 15")
+    (make-face 'my-xxxx-face)
+    (set-face-attribute 'my-xxxx-face nil :font "WenQuanYi ZenHei Mono 15")
+    (setq buffer-face-mode-face 'my-xxxx-face)
     (buffer-face-mode)
     )
 (add-hook 'telega-root-mode-hook 'telega-buffer-face-mode-variable)
